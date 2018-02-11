@@ -1,5 +1,12 @@
 'use strict'
 
 export const map = (arr = [], func = item => item) => {
-  return arr.map((v, i) => func(arr[i], i, arr))
+  if(!Array.isArray(arr)) throw new TypeError('The first parameter must be an array')
+  if(typeof func !== 'function') throw new TypeError('The second parameter must be a function')
+
+  const newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(func(arr[i], i, arr))
+  }
+  return newArr
 }
